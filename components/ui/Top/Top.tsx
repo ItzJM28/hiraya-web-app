@@ -204,7 +204,7 @@ export default function Top() {
             <div className="group overflow-hidden rounded-[2rem] border-2 border-[#F2142C] bg-[#1A1A1A] shadow-[0_25px_65px_rgba(242,20,44,0.25)] hover:shadow-[0_35px_85px_rgba(242,20,44,0.35)] transition-all duration-300">
               <div className="relative overflow-hidden h-64 md:h-72">
                 <img
-                  src="/grillingdemo.png"
+                  src="/GrillingDemo.png"
                   alt="Charcoal Grilled Chicken Inasal"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -225,7 +225,7 @@ export default function Top() {
             <div className="group overflow-hidden rounded-[2rem] border-2 border-[#FECE05] bg-[#1A1A1A] shadow-[0_25px_65px_rgba(254,206,5,0.2)] hover:shadow-[0_35px_85px_rgba(254,206,5,0.3)] transition-all duration-300">
               <div className="relative overflow-hidden h-64 md:h-72">
                 <img
-                  src="/cansi.png"
+                  src="/Cansi.png"
                   alt="Specialty Broth with Dumplings"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -246,7 +246,7 @@ export default function Top() {
             <div className="group overflow-hidden rounded-[2rem] border-2 border-[#FF6B35] bg-[#1A1A1A] shadow-[0_25px_65px_rgba(255,107,53,0.2)] hover:shadow-[0_35px_85px_rgba(255,107,53,0.3)] transition-all duration-300">
               <div className="relative overflow-hidden h-64 md:h-72">
                 <img
-                  src="/butteredshrimp.png"
+                  src="/ButteredShrimp.png"
                   alt="ButteredShrimp"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
