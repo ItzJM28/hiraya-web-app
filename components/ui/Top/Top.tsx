@@ -1,34 +1,11 @@
 import Image from "next/image";
-import {
-  IconChevronLeft,
-  IconChevronRight,
-  IconFlameFilled,
-} from "@tabler/icons-react";
+import { IconChevronRight, IconFlameFilled } from "@tabler/icons-react";
+import Link from "next/link";
 
-const NAV_ITEMS = ["Home", "Menus", "Location", "Reservation", "Contact Us"];
-
-const FEATURED_ITEMS = [
-  {
-    name: "Chicken Inasal",
-    price: "P130.00",
-    description: "Our signature authentic chicken inasal charcoal-grilled.",
-  },
-  {
-    name: "Pecho Pak",
-    price: "P130.00",
-    description: "Juicy pecho cut served smoky, tender, and freshly grilled.",
-  },
-  {
-    name: "Pork BBQ",
-    price: "P130.00",
-    description: "Sweet-savory barbecue skewers finished over live charcoal.",
-  },
-  {
-    name: "Chicken Wings",
-    price: "P130.00",
-    description: "Classic grilled wings with Hiraya's bold inasal marinade.",
-  },
-];
+import { Button } from "@/components/ui/button";
+import FeaturedCarousel from "@/components/ui/Top/FeaturedCarousel";
+import NavBar from "@/components/ui/Top/NavBar";
+import { FEATURED_ITEMS } from "@/constants/featured-items";
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -38,35 +15,6 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
       </span>
       <span className="h-0.5 w-12 bg-[#f5a400]" />
     </div>
-  );
-}
-
-function FeaturedCard({
-  item,
-}: {
-  item: (typeof FEATURED_ITEMS)[number];
-}) {
-  return (
-    <article className="overflow-hidden rounded-lg bg-[#151515] shadow-[0_24px_46px_rgba(0,0,0,0.42)]">
-      <div className="relative aspect-[1.45/1] w-full overflow-hidden">
-        <Image
-          src="/OurStoryImagePart.png"
-          alt={item.name}
-          fill
-          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-          className="object-cover object-[42%_42%]"
-        />
-      </div>
-      <div className="grid min-h-32 grid-cols-[1fr_auto] gap-x-4 gap-y-2 p-5">
-        <h3 className="text-lg font-extrabold leading-tight text-white">
-          {item.name}
-        </h3>
-        <p className="pt-1 text-sm font-black text-[#f5a400]">{item.price}</p>
-        <p className="col-span-2 max-w-48 text-sm leading-5 text-white/72">
-          {item.description}
-        </p>
-      </div>
-    </article>
   );
 }
 
@@ -86,47 +34,7 @@ export default function Top() {
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.35)_0%,rgba(0,0,0,0.05)_55%,rgba(0,0,0,0.82)_100%)]" />
 
         <div className="relative z-10 mx-auto flex min-h-[620px] w-full max-w-[1440px] flex-col px-6 py-8 sm:px-10 lg:px-24">
-          <header className="grid items-center gap-5 md:grid-cols-[210px_1fr_160px]">
-            <a href="#" aria-label="Hiraya's Grill home" className="w-fit">
-              <Image
-                src="/HirayaWordLogo.png"
-                alt="Hiraya's Grill"
-                width={121}
-                height={72}
-                priority
-                className="h-auto w-28"
-              />
-            </a>
-
-            <nav aria-label="Primary navigation" className="hidden md:block">
-              <ul className="flex items-center justify-center gap-9">
-                {NAV_ITEMS.map((item) => (
-                  <li key={item}>
-                    <a
-                      href="#"
-                      className="group flex flex-col items-center gap-2 text-[0.68rem] font-black uppercase tracking-normal text-white transition hover:text-[#f5a400]"
-                    >
-                      {item}
-                      <span
-                        className={`h-0.5 w-7 rounded-full transition ${
-                          item === "Home"
-                            ? "bg-[#f5a400]"
-                            : "bg-transparent group-hover:bg-[#f5a400]"
-                        }`}
-                      />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-
-            <a
-              href="#featured"
-              className="justify-self-start rounded-lg border border-[#f5a400] px-9 py-2.5 text-center text-[0.68rem] font-black uppercase tracking-normal text-[#f5a400] transition hover:bg-[#f5a400] hover:text-black md:justify-self-end"
-            >
-              Order Now
-            </a>
-          </header>
+          <NavBar />
 
           <div className="flex flex-1 items-center py-16">
             <div className="max-w-[640px]">
@@ -143,19 +51,22 @@ export default function Top() {
                 favorites made with flavor and care.
               </p>
               <div className="mt-6 flex flex-wrap gap-4">
-                <a
-                  href="#featured"
-                  className="inline-flex min-w-40 items-center justify-center gap-2 rounded-lg bg-[#f5a400] px-6 py-3 text-[0.72rem] font-black uppercase tracking-normal text-black transition hover:bg-white"
+                <Button
+                  asChild
+                  className="h-11 min-w-40 rounded-lg bg-[#f5a400] px-6 text-[0.72rem] font-black uppercase tracking-normal text-black hover:bg-white"
                 >
-                  View Our Menu
-                  <IconChevronRight className="h-4 w-4" />
-                </a>
-                <a
-                  href="#story"
-                  className="inline-flex min-w-36 items-center justify-center rounded-lg border border-[#f5a400] px-6 py-3 text-[0.72rem] font-black uppercase tracking-normal text-[#f5a400] transition hover:bg-[#f5a400] hover:text-black"
+                  <Link href="#featured">
+                    View Our Menu
+                    <IconChevronRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="h-11 min-w-36 rounded-lg border-[#f5a400] bg-transparent px-6 text-[0.72rem] font-black uppercase tracking-normal text-[#f5a400] hover:bg-[#f5a400] hover:text-black"
                 >
-                  About Us
-                </a>
+                  <Link href="#story">About Us</Link>
+                </Button>
               </div>
             </div>
           </div>
@@ -188,12 +99,13 @@ export default function Top() {
               fresh ingredients, grilled to perfection, and served with warm
               Filipino hospitality.
             </p>
-            <a
-              href="#featured"
-              className="mt-8 inline-flex min-w-32 items-center justify-center rounded-lg border border-[#f5a400] px-7 py-3 text-[0.72rem] font-black uppercase tracking-normal text-[#f5a400] transition hover:bg-[#f5a400] hover:text-black"
+            <Button
+              asChild
+              variant="outline"
+              className="mt-8 h-11 min-w-32 rounded-lg border-[#f5a400] bg-transparent px-7 text-[0.72rem] font-black uppercase tracking-normal text-[#f5a400] hover:bg-[#f5a400] hover:text-black"
             >
-              Learn More
-            </a>
+              <Link href="#featured">Learn More</Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -208,37 +120,16 @@ export default function Top() {
               </h2>
             </div>
 
-            <a
-              href="#"
-              className="inline-flex w-fit min-w-40 items-center justify-center rounded-lg border border-[#f5a400] px-6 py-3 text-[0.72rem] font-black uppercase tracking-normal text-[#f5a400] transition hover:bg-[#f5a400] hover:text-black"
+            <Button
+              asChild
+              variant="outline"
+              className="h-11 w-fit min-w-40 rounded-lg border-[#f5a400] bg-transparent px-6 text-[0.72rem] font-black uppercase tracking-normal text-[#f5a400] hover:bg-[#f5a400] hover:text-black"
             >
-              View Full Menu
-            </a>
+              <Link href="#">View Full Menu</Link>
+            </Button>
           </div>
 
-          <div className="relative">
-            <button
-              aria-label="Previous featured item"
-              className="absolute -left-12 top-1/2 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/80 text-white transition hover:border-[#f5a400] hover:text-[#f5a400] lg:flex"
-              type="button"
-            >
-              <IconChevronLeft className="h-5 w-5" />
-            </button>
-
-            <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
-              {FEATURED_ITEMS.map((item) => (
-                <FeaturedCard key={item.name} item={item} />
-              ))}
-            </div>
-
-            <button
-              aria-label="Next featured item"
-              className="absolute -right-12 top-1/2 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/80 text-white transition hover:border-[#f5a400] hover:text-[#f5a400] lg:flex"
-              type="button"
-            >
-              <IconChevronRight className="h-5 w-5" />
-            </button>
-          </div>
+          <FeaturedCarousel items={FEATURED_ITEMS} />
         </div>
       </section>
     </main>
