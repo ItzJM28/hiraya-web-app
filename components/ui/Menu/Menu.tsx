@@ -21,9 +21,7 @@ const MENU_ITEMS_RIGHT = [
   { name: "HOTDOG", price: "130" },
 ];
 
-interface MenuProps {}
-
-const Menu: FC<MenuProps> = () => (
+const Menu: FC = () => (
   <section
     id="menu-section"
     className="min-h-screen bg-[#0D0D0D] text-white py-16"

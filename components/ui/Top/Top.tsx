@@ -1,270 +1,246 @@
-"use client";
+import Image from "next/image";
+import {
+  IconChevronLeft,
+  IconChevronRight,
+  IconFlameFilled,
+} from "@tabler/icons-react";
 
-import { MenuItem } from "@/components/ui/MenuItem";
+const NAV_ITEMS = ["Home", "Menus", "Location", "Reservation", "Contact Us"];
 
-const FEATURES = ["Made Fresh Daily", "Bold Flavors", "Loved by Thousands"];
-const TAGS = ["Made Fresh", "Served Hot"];
+const FEATURED_ITEMS = [
+  {
+    name: "Chicken Inasal",
+    price: "P130.00",
+    description: "Our signature authentic chicken inasal charcoal-grilled.",
+  },
+  {
+    name: "Pecho Pak",
+    price: "P130.00",
+    description: "Juicy pecho cut served smoky, tender, and freshly grilled.",
+  },
+  {
+    name: "Pork BBQ",
+    price: "P130.00",
+    description: "Sweet-savory barbecue skewers finished over live charcoal.",
+  },
+  {
+    name: "Chicken Wings",
+    price: "P130.00",
+    description: "Classic grilled wings with Hiraya's bold inasal marinade.",
+  },
+];
+
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="inline-flex flex-col gap-2">
+      <span className="font-heading text-2xl font-black uppercase leading-none tracking-normal text-[#f5a400]">
+        {children}
+      </span>
+      <span className="h-0.5 w-12 bg-[#f5a400]" />
+    </div>
+  );
+}
+
+function FeaturedCard({
+  item,
+}: {
+  item: (typeof FEATURED_ITEMS)[number];
+}) {
+  return (
+    <article className="overflow-hidden rounded-lg bg-[#151515] shadow-[0_24px_46px_rgba(0,0,0,0.42)]">
+      <div className="relative aspect-[1.45/1] w-full overflow-hidden">
+        <Image
+          src="/OurStoryImagePart.png"
+          alt={item.name}
+          fill
+          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+          className="object-cover object-[42%_42%]"
+        />
+      </div>
+      <div className="grid min-h-32 grid-cols-[1fr_auto] gap-x-4 gap-y-2 p-5">
+        <h3 className="text-lg font-extrabold leading-tight text-white">
+          {item.name}
+        </h3>
+        <p className="pt-1 text-sm font-black text-[#f5a400]">{item.price}</p>
+        <p className="col-span-2 max-w-48 text-sm leading-5 text-white/72">
+          {item.description}
+        </p>
+      </div>
+    </article>
+  );
+}
 
 export default function Top() {
   return (
-    <main className="min-h-screen bg-[#0D0D0D] text-white">
-      {/* ================= CONTAINER ================= */}
-      <div className="mx-auto flex min-h-screen max-w-[1600px] flex-col px-6 py-8 sm:px-10 lg:px-16">
-        {/* ================= HEADER SECTION ================= */}
-        <header className="flex flex-1 flex-col justify-between gap-10">
-          {/* ================= HERO SECTION ================= */}
-          <div className="flex flex-col gap-10">
-            {/* HERO TITLE & LOGO */}
-            <div className="flex items-center justify-between gap-8">
-              {/* HERO TITLE */}
-              {/* <h1 className="text-[clamp(4rem,9vw,8rem)] font-black uppercase leading-[0.85] tracking-[-0.08em] text-[#F2142C] flex-1">
-                Sulit kag Namit.
-              </h1> */}
-              <img
-                src="/hiraya-brand-logo2.png"
-                alt="Hiraya's Grill - Sulit Kag Namit"
-                className="max-w-full h-auto object-contain"
-                style={{ maxWidth: "200px" }}
+    <main className="min-h-[2100px] bg-black text-white">
+      <section className="relative min-h-[620px] overflow-hidden bg-black">
+        <Image
+          src="/BackgroundImage.png"
+          alt="Charcoal-grilled chicken inasal and skewers"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.95)_0%,rgba(0,0,0,0.72)_35%,rgba(0,0,0,0.24)_68%,rgba(0,0,0,0.1)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.35)_0%,rgba(0,0,0,0.05)_55%,rgba(0,0,0,0.82)_100%)]" />
+
+        <div className="relative z-10 mx-auto flex min-h-[620px] w-full max-w-[1440px] flex-col px-6 py-8 sm:px-10 lg:px-24">
+          <header className="grid items-center gap-5 md:grid-cols-[210px_1fr_160px]">
+            <a href="#" aria-label="Hiraya's Grill home" className="w-fit">
+              <Image
+                src="/HirayaWordLogo.png"
+                alt="Hiraya's Grill"
+                width={121}
+                height={72}
+                priority
+                className="h-auto w-28"
               />
+            </a>
 
-              {/* LOGO */}
-              {/* <div className="hidden lg:flex items-center justify-center flex-shrink-0">
-                <img
-                  src="/hiraya-logo-only.png"
-                  alt="Hiraya's Grill Logo"
-                  className="h-32 w-32 object-contain"
-                  style={{ maxWidth: "50px" }}
-                />
-              </div> */}
-            </div>
-
-            {/* ================= HERO CONTENT GRID ================= */}
-            <div className="grid gap-10 xl:grid-cols-[1.2fr_0.9fr]">
-              {/* ================= DESCRIPTION & FEATURES SECTION ================= */}
-              <div className="flex flex-col justify-center gap-6">
-                {/* HIRAYA BRANDING LOGO */}
-                <div className="flex justify-center">
-                  {/* <img
-                    src="/hiraya-brand-logo.png"
-                    alt="Hiraya's Grill - Sulit Kag Namit"
-                    className="max-w-full h-auto object-contain"
-                    style={{ maxWidth: "500px" }}
-                  /> */}
-
-                  <h1 className="text-[clamp(4rem,9vw,8rem)] font-black uppercase leading-[0.85] tracking-[-0.08em] text-[#F2142C] flex-1">
-                    Sulit kag Namit.
-                  </h1>
-                </div>
-
-                {/* DESCRIPTION TEXT WITH BACKGROUND IMAGE */}
-
-                {/* Dark overlay for text readability */}
-                {/* <div className="absolute inset-0 bg-black/60"></div> */}
-
-                {/* Text content */}
-                <div className="relative z-10">
-                  <p className="max-w-xl text-sm uppercase tracking-[0.25em] text-[#E0E0E0]">
-                    Authentic charcoal-grilled chicken inasal, Filipino
-                    favorites, and satisfying meals made for sharing with family
-                    and friends.
-                  </p>
-                </div>
-
-                {/* FEATURES BADGES */}
-                <div className="grid gap-4 sm:grid-cols-3">
-                  {FEATURES.map((item) => (
-                    <div
-                      key={item}
-                      className="rounded-3xl bg-[#FECE05] px-5 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#0D0D0D] shadow-[0_14px_35px_rgba(242,20,44,0.3)]"
+            <nav aria-label="Primary navigation" className="hidden md:block">
+              <ul className="flex items-center justify-center gap-9">
+                {NAV_ITEMS.map((item) => (
+                  <li key={item}>
+                    <a
+                      href="#"
+                      className="group flex flex-col items-center gap-2 text-[0.68rem] font-black uppercase tracking-normal text-white transition hover:text-[#f5a400]"
                     >
                       {item}
-                    </div>
-                  ))}
-                </div>
-              </div>
+                      <span
+                        className={`h-0.5 w-7 rounded-full transition ${
+                          item === "Home"
+                            ? "bg-[#f5a400]"
+                            : "bg-transparent group-hover:bg-[#f5a400]"
+                        }`}
+                      />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-              {/* ================= FEATURED IMAGE CARD ================= */}
-              <div className="relative overflow-hidden rounded-[2.5rem] border-2 border-[#F2142C] bg-[#1A1A1A] p-6 shadow-[0_40px_90px_rgba(242,20,44,0.25)]">
-                {/* FEATURED BADGE */}
-                <div className="absolute right-6 top-6 rounded-full border border-white bg-[#F2142C] px-5 py-2 mt-2 mr-2 text-[0.65rem] uppercase tracking-[0.3em] text-white shadow-[0_16px_40px_rgba(242,20,44,0.4)]">
-                  Promo Alert!
-                </div>
+            <a
+              href="#featured"
+              className="justify-self-start rounded-lg border border-[#f5a400] px-9 py-2.5 text-center text-[0.68rem] font-black uppercase tracking-normal text-[#f5a400] transition hover:bg-[#f5a400] hover:text-black md:justify-self-end"
+            >
+              Order Now
+            </a>
+          </header>
 
-                {/* FEATURED IMAGE */}
-                <img
-                  src="/B1T1FinalHiraya2.png"
-                  alt="Buy 1 Get 1 Unli Rice Promo"
-                  className="mx-auto aspect-[4/3] w-full rounded-[2rem] object-cover"
-                />
-
-                {/* FEATURED TAGS */}
-                <div className="mt-6 flex flex-wrap justify-center gap-3">
-                  {TAGS.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full bg-[#FECE05] px-4 py-3 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-[#0D0D0D] shadow-[0_10px_25px_rgba(254,206,5,0.3)]"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+          <div className="flex flex-1 items-center py-16">
+            <div className="max-w-[640px]">
+              <p className="mb-3 flex items-center gap-2 text-xl font-bold uppercase leading-none tracking-normal text-white/90">
+                Authentic Ilonggo Inasal
+                <IconFlameFilled className="h-5 w-5 text-[#ef3d22]" />
+              </p>
+              <h1 className="font-heading text-6xl font-black uppercase leading-[0.9] tracking-normal text-white sm:text-7xl md:text-8xl lg:text-[7.35rem]">
+                Sulit Kag
+                <span className="block text-[#f5a400]">Namit!</span>
+              </h1>
+              <p className="mt-5 max-w-lg text-lg font-semibold leading-7 text-white/78 sm:text-xl">
+                From our grill to your table, enjoy fresh inasal and grilled
+                favorites made with flavor and care.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-4">
+                <a
+                  href="#featured"
+                  className="inline-flex min-w-40 items-center justify-center gap-2 rounded-lg bg-[#f5a400] px-6 py-3 text-[0.72rem] font-black uppercase tracking-normal text-black transition hover:bg-white"
+                >
+                  View Our Menu
+                  <IconChevronRight className="h-4 w-4" />
+                </a>
+                <a
+                  href="#story"
+                  className="inline-flex min-w-36 items-center justify-center rounded-lg border border-[#f5a400] px-6 py-3 text-[0.72rem] font-black uppercase tracking-normal text-[#f5a400] transition hover:bg-[#f5a400] hover:text-black"
+                >
+                  About Us
+                </a>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* ================= MENU SECTION ================= */}
-          <section className="grid gap-8 xl:grid-cols-[1.5fr_1fr]">
-            {/* ================= MENU DESCRIPTION CARD ================= */}
-            <div className="rounded-[2.5rem] border-2 border-[#F2142C] bg-[#1A1A1A] p-10 shadow-[0_25px_65px_rgba(242,20,44,0.25)]">
-              {/* MENU LABEL */}
-              <p className="text-sm uppercase tracking-[0.3em] text-[#FECE05]">
-                Today&apos;s FAVORITE
-              </p>
+      <section
+        id="story"
+        className="bg-[radial-gradient(circle_at_19%_41%,rgba(255,255,255,0.16),transparent_24%),linear-gradient(90deg,#171717_0%,#070707_58%,#050505_100%)] py-16 sm:py-20"
+      >
+        <div className="mx-auto grid max-w-[1440px] items-center gap-10 px-6 sm:px-10 lg:grid-cols-[1fr_0.92fr] lg:px-24">
+          <div className="relative min-h-[320px] sm:min-h-[430px]">
+            <Image
+              src="/OurStoryImagePart.png"
+              alt="Chicken inasal served on a green plate"
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-contain object-left"
+            />
+          </div>
 
-              {/* MENU TITLE */}
-              <h2 className="mt-5 text-5xl font-black uppercase tracking-[-0.04em] text-white">
-                EXPERIENCE THE AUTHENTIC TASTE OF CHARCOAL-GRILLED CHICKEN
-                INASAL.
+          <div className="max-w-[600px]">
+            <SectionLabel>Our Story</SectionLabel>
+            <h2 className="mt-3 text-4xl font-black leading-tight tracking-normal text-white sm:text-5xl lg:text-6xl">
+              Grilled with Passion. Made for Everyone.
+            </h2>
+            <p className="mt-5 max-w-lg text-lg leading-6 text-white/70">
+              At Hiraya&apos;s Grill, we bring people together over authentic
+              Ilonggo inasal and grilled favorites. Every dish is made with
+              fresh ingredients, grilled to perfection, and served with warm
+              Filipino hospitality.
+            </p>
+            <a
+              href="#featured"
+              className="mt-8 inline-flex min-w-32 items-center justify-center rounded-lg border border-[#f5a400] px-7 py-3 text-[0.72rem] font-black uppercase tracking-normal text-[#f5a400] transition hover:bg-[#f5a400] hover:text-black"
+            >
+              Learn More
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="featured" className="bg-[#101010] py-16 sm:py-20">
+        <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-24">
+          <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <SectionLabel>Featured</SectionLabel>
+              <h2 className="mt-3 text-4xl font-black leading-tight tracking-normal text-white sm:text-5xl">
+                Our Best Sellers
               </h2>
-
-              {/* MENU DESCRIPTION */}
-              <p className="mt-6 max-w-xl text-base leading-8 text-[#B0B0B0]">
-                Juicy, perfectly marinated, and flame-grilled over charcoal for
-                that signature smoky flavor. Served fresh every day and made
-                even better with unlimited rice. Experience the irresistible
-                taste of our chicken inasal, a beloved Filipino favorite that
-                brings family and friends together for a delicious meal.
-              </p>
-
-              <h1 className="mt-2 text-2xl font-bold text-white">
-                Sulit kag Namit in every bite.
-              </h1>
-
-              {/* ORDER BUTTON */}
-              <button className="mt-10 inline-flex rounded-full bg-[#F2142C] px-9 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white shadow-[0_18px_45px_rgba(242,20,44,0.3)] transition hover:bg-[#F64527]">
-                Order Now
-              </button>
             </div>
 
-            {/* ================= MENU ITEMS LIST ================= */}
-            <div className="grid gap-4">
-              {/* MENU ITEM 1 */}
-              <MenuItem
-                label="Unli Paa"
-                price="130.00"
-                description="Crispy vegetable samosas with savory filling and aromatic spices."
-              />
+            <a
+              href="#"
+              className="inline-flex w-fit min-w-40 items-center justify-center rounded-lg border border-[#f5a400] px-6 py-3 text-[0.72rem] font-black uppercase tracking-normal text-[#f5a400] transition hover:bg-[#f5a400] hover:text-black"
+            >
+              View Full Menu
+            </a>
+          </div>
 
-              {/* MENU ITEM 2 */}
-              <MenuItem
-                label="Unli Pecho"
-                price="130.00"
-                description="Juicy chicken samosas with bold, rich flavor and a crisp crust."
-              />
+          <div className="relative">
+            <button
+              aria-label="Previous featured item"
+              className="absolute -left-12 top-1/2 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/80 text-white transition hover:border-[#f5a400] hover:text-[#f5a400] lg:flex"
+              type="button"
+            >
+              <IconChevronLeft className="h-5 w-5" />
+            </button>
 
-              {/* MORE ITEMS PROMO CARD */}
-              <article className="rounded-[2rem] border-2 border-[#FFB01D] bg-[#1A1A1A] p-6 text-white shadow-[0_18px_45px_rgba(255,176,29,0.3)]">
-                {/* PROMO LABEL */}
-                <p className="text-sm uppercase tracking-[0.24em] font-semibold text-[#FFB01D]">
-                  Regular Meals + MORE
-                </p>
-
-                {/* PROMO TITLE */}
-                <p className="mt-4 text-3xl font-black uppercase tracking-[-0.02em] text-white">
-                  Explore our full menu of delicious inasal meals and exciting
-                </p>
-
-                {/* PROMO ITEMS LIST */}
-                <p className="mt-4 text-sm leading-7 text-[#B0B0B0]">
-                  From our signature chicken inasal to flavorful sides and
-                  refreshing drinks, there&apos;s something for everyone to
-                  enjoy. Don&apos;t miss out on our mouthwatering dishes that
-                  are perfect for sharing with family and friends.
-                </p>
-
-                {/* VIEW MENU LINK */}
-                <a
-                  href="#menu-section"
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.22em] text-[#FFB01D] hover:opacity-75 transition"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const element = document.getElementById("menu-section");
-                    element?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                >
-                  View full menu →
-                </a>
-              </article>
-            </div>
-          </section>
-
-          {/* ================= FOOD SHOWCASE SECTION ================= */}
-          <section className="mt-16 grid gap-6 grid-cols-1 md:grid-cols-3 items-stretch">
-            {/* GRILLED CHICKEN */}
-            <div className="group overflow-hidden rounded-[2rem] border-2 border-[#F2142C] bg-[#1A1A1A] shadow-[0_25px_65px_rgba(242,20,44,0.25)] hover:shadow-[0_35px_85px_rgba(242,20,44,0.35)] transition-all duration-300">
-              <div className="relative overflow-hidden h-64 md:h-72">
-                <img
-                  src="/GrillingDemo.png"
-                  alt="Charcoal Grilled Chicken Inasal"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] via-transparent to-transparent"></div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-black uppercase tracking-[-0.02em] text-[#F2142C]">
-                  Charcoal Grilled
-                </h3>
-                <p className="mt-3 text-sm text-[#B0B0B0] leading-6">
-                  Juicy, perfectly marinated chicken inasal grilled over
-                  authentic charcoal for that signature smoky flavor.
-                </p>
-              </div>
+            <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
+              {FEATURED_ITEMS.map((item) => (
+                <FeaturedCard key={item.name} item={item} />
+              ))}
             </div>
 
-            {/* SPECIALTY SOUP */}
-            <div className="group overflow-hidden rounded-[2rem] border-2 border-[#FECE05] bg-[#1A1A1A] shadow-[0_25px_65px_rgba(254,206,5,0.2)] hover:shadow-[0_35px_85px_rgba(254,206,5,0.3)] transition-all duration-300">
-              <div className="relative overflow-hidden h-64 md:h-72">
-                <img
-                  src="/Cansi.png"
-                  alt="Specialty Broth with Dumplings"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] via-transparent to-transparent"></div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-black uppercase tracking-[-0.02em] text-[#FECE05]">
-                  Specialty Broth
-                </h3>
-                <p className="mt-3 text-sm text-[#B0B0B0] leading-6">
-                  Rich, savory broth with tender dumplings and succulent meat -
-                  a comforting favorite for families.
-                </p>
-              </div>
-            </div>
-
-            {/* SPICY SHRIMP */}
-            <div className="group overflow-hidden rounded-[2rem] border-2 border-[#FF6B35] bg-[#1A1A1A] shadow-[0_25px_65px_rgba(255,107,53,0.2)] hover:shadow-[0_35px_85px_rgba(255,107,53,0.3)] transition-all duration-300">
-              <div className="relative overflow-hidden h-64 md:h-72">
-                <img
-                  src="/ButteredShrimp.png"
-                  alt="ButteredShrimp"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] via-transparent to-transparent"></div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-black uppercase tracking-[-0.02em] text-[#FF6B35]">
-                  Spicy Sensation
-                </h3>
-                <p className="mt-3 text-sm text-[#B0B0B0] leading-6">
-                  Bold, vibrant spiced shrimp in a fragrant buttery sauce - a
-                  fiery delight for heat lovers.
-                </p>
-              </div>
-            </div>
-          </section>
-        </header>
-      </div>
+            <button
+              aria-label="Next featured item"
+              className="absolute -right-12 top-1/2 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/80 text-white transition hover:border-[#f5a400] hover:text-[#f5a400] lg:flex"
+              type="button"
+            >
+              <IconChevronRight className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

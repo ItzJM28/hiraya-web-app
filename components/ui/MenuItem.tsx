@@ -1,4 +1,4 @@
-import { colors, styles } from "@/constants/styles";
+import { styles } from "@/constants/styles";
 
 interface MenuItemProps {
   label: string;

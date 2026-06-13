@@ -1,9 +1,6 @@
 import type { FC } from 'react';
 
-
-interface OrderProps {}
-
-const Order: FC<OrderProps> = () => (
+const Order: FC = () => (
   <div>
     Order Component
   </div>
