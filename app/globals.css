@@ -132,3 +132,17 @@
     scroll-behavior: smooth;
   }
 }
+
+@layer utilities {
+  .mobile-bound {
+    width: min(100%, 350px);
+    max-width: calc(100vw - 2.5rem);
+  }
+
+  @media (min-width: 640px) {
+    .mobile-bound {
+      width: auto;
+      max-width: none;
+    }
+  }
+}

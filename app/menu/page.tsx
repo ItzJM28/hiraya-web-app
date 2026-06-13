@@ -30,7 +30,7 @@ const MENU_GROUPS = [
 
 export default function MenuPage() {
   return (
-    <main className="min-h-screen bg-[#080808] text-white">
+    <main className="min-h-screen overflow-x-hidden bg-[#080808] text-white">
       <section className="relative overflow-hidden bg-black">
         <Image
           src="/BackgroundImage.png"
@@ -41,21 +41,21 @@ export default function MenuPage() {
           className="object-cover object-center opacity-55"
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.96),rgba(0,0,0,0.62),rgba(0,0,0,0.9))]" />
-        <div className="relative z-10 mx-auto max-w-[1440px] px-6 py-8 sm:px-10 lg:px-24">
+        <div className="relative z-10 mx-auto max-w-[1440px] px-5 py-6 sm:px-10 sm:py-8 lg:px-24">
           <NavBar activeHref="/menu" />
-          <div className="py-20">
-            <p className="font-heading text-2xl font-black uppercase text-[#f5a400]">
+          <div className="py-14 sm:py-20">
+            <p className="font-heading text-xl font-black uppercase text-[#f5a400] sm:text-2xl">
               Hiraya&apos;s Menu
             </p>
-            <h1 className="mt-3 max-w-3xl font-heading text-6xl font-black uppercase leading-[0.94] sm:text-7xl">
+            <h1 className="mobile-bound mt-3 sm:max-w-3xl font-heading text-3xl font-black uppercase leading-[0.98] min-[390px]:text-4xl sm:text-7xl">
               Grilled Favorites, Served Hot.
             </h1>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-[1440px] gap-10 px-6 py-16 sm:px-10 lg:grid-cols-[0.86fr_1fr] lg:px-24">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
+      <section className="mx-auto grid max-w-[1440px] gap-10 px-5 py-12 sm:px-10 sm:py-16 lg:grid-cols-[0.86fr_1fr] lg:px-24">
+        <div className="mobile-bound grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
           {FEATURED_ITEMS.slice(0, 2).map((item) => (
             <article
               key={item.name}
@@ -70,7 +70,7 @@ export default function MenuPage() {
                   className="object-cover object-[42%_42%]"
                 />
               </div>
-              <div className="flex items-start justify-between gap-4 p-5">
+              <div className="grid gap-3 p-5 sm:flex sm:items-start sm:justify-between sm:gap-4">
                 <div>
                   <h2 className="text-xl font-black">{item.name}</h2>
                   <p className="mt-2 text-sm leading-5 text-white/70">
@@ -85,19 +85,19 @@ export default function MenuPage() {
           ))}
         </div>
 
-        <div className="grid gap-8">
+        <div className="mobile-bound grid gap-8">
           {MENU_GROUPS.map((group) => (
             <section key={group.title}>
-              <h2 className="mb-5 text-3xl font-black text-white">
+              <h2 className="mb-5 text-2xl font-black text-white sm:text-3xl">
                 {group.title}
               </h2>
               <div className="grid gap-4">
                 {group.items.map(([name, price]) => (
                   <div
                     key={name}
-                    className="flex items-center justify-between border-b border-white/12 pb-4"
+                    className="flex items-center justify-between gap-4 border-b border-white/12 pb-4"
                   >
-                    <span className="font-bold uppercase tracking-normal">
+                    <span className="font-bold uppercase tracking-normal leading-tight">
                       {name}
                     </span>
                     <span className="font-black text-[#f5a400]">{price}</span>

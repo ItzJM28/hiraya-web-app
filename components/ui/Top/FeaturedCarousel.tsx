@@ -21,12 +21,14 @@ function FeaturedCard({ item }: { item: FeaturedItem }) {
           className="object-cover object-[42%_42%]"
         />
       </div>
-      <div className="grid min-h-32 grid-cols-[1fr_auto] gap-x-4 gap-y-2 p-5">
+      <div className="grid min-h-32 gap-x-4 gap-y-2 p-5 sm:grid-cols-[1fr_auto]">
         <h3 className="text-lg font-extrabold leading-tight text-white">
           {item.name}
         </h3>
-        <p className="pt-1 text-sm font-black text-[#f5a400]">{item.price}</p>
-        <p className="col-span-2 max-w-48 text-sm leading-5 text-white/72">
+        <p className="text-sm font-black text-[#f5a400] sm:pt-1">
+          {item.price}
+        </p>
+        <p className="max-w-48 text-sm leading-5 text-white/72 sm:col-span-2">
           {item.description}
         </p>
       </div>
@@ -72,9 +74,16 @@ export default function FeaturedCarousel({
         <IconChevronLeft className="h-5 w-5" />
       </Button>
 
-      <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
-        {visibleItems.map((item) => (
-          <FeaturedCard key={`${activeIndex}-${item.name}`} item={item} />
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-7">
+        {visibleItems.map((item, index) => (
+          <div
+            key={`${activeIndex}-${item.name}`}
+            className={`${index > 0 ? "hidden sm:block" : ""} ${
+              index > 1 ? "sm:hidden lg:block" : ""
+            }`}
+          >
+            <FeaturedCard item={item} />
+          </div>
         ))}
       </div>
 
@@ -89,7 +98,30 @@ export default function FeaturedCarousel({
         <IconChevronRight className="h-5 w-5" />
       </Button>
 
-      <div className="mt-8 flex justify-center gap-2">
+      <div className="mt-6 flex justify-center gap-3 lg:hidden">
+        <Button
+          aria-label="Previous featured item"
+          variant="outline"
+          size="icon-sm"
+          className="rounded-full border-white/80 bg-transparent text-white hover:border-[#f5a400] hover:bg-transparent hover:text-[#f5a400]"
+          type="button"
+          onClick={goToPrevious}
+        >
+          <IconChevronLeft className="h-5 w-5" />
+        </Button>
+        <Button
+          aria-label="Next featured item"
+          variant="outline"
+          size="icon-sm"
+          className="rounded-full border-white/80 bg-transparent text-white hover:border-[#f5a400] hover:bg-transparent hover:text-[#f5a400]"
+          type="button"
+          onClick={goToNext}
+        >
+          <IconChevronRight className="h-5 w-5" />
+        </Button>
+      </div>
+
+      <div className="mt-6 flex justify-center gap-2 lg:mt-8">
         {items.map((item, index) => (
           <button
             key={item.name}
